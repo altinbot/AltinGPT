@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AltinBot</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      border-bottom: 1px solid #fff;
+    }
+    header img {
+      width: 150px;
+    }
+    #chat {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+    #userInput {
+      display: flex;
+      border-top: 1px solid #fff;
+    }
+    #userInput input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+    #userInput button {
+      padding: 10px;
+      background: #fff;
+      color: #000;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.svg" alt="AltinBot logo"/>
+  </header>
+  <div id="chat"></div>
+  <div id="userInput">
+    <input type="text" id="message" placeholder="Typ iets..." />
+    <button onclick="sendMessage()">Stuur</button>
+  </div>
+
+  <script>
+    const chat = document.getElementById('chat');
+    const messageInput = document.getElementById('message');
+
+    function sendMessage() {
+      const text = messageInput.value;
+      if (text.trim() === '') return;
+
+      const userMsg = document.createElement('div');
+      userMsg.textContent = "Jij: " + text;
+      chat.appendChild(userMsg);
+
+      // AI fake simple reply
+      const botMsg = document.createElement('div');
+      botMsg.textContent = "AltinBot: " + reageer(text);
+      chat.appendChild(botMsg);
+
+      messageInput.value = '';
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function reageer(tekst) {
+      const lower = tekst.toLowerCase();
+      if (lower.includes("hallo") || lower.includes("hey")) return "Hallo! Hoe gaat het?";
+      if (lower.includes("hoe heet je")) return "Ik ben AltinBot 🤖!";
+      if (lower.includes("hoe gaat het")) return "Het gaat super! En met jou?";
+      return "Dat begrijp ik nog niet, maar ik leer elke dag bij!";
+    }
+  </script>
+</body>
+</html>
